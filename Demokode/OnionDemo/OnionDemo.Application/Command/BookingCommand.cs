@@ -25,7 +25,7 @@ public class BookingCommand : IBookingCommand
             _uow.BeginTransaction();
 
             // Do
-            var booking = Booking.Create(bookingDto.StartDate, bookingDto.EndDate, _domainService);
+            var booking = Booking.Create(bookingDto.StartDate, bookingDto.EndDate, _domainSer);
 
             // Save
             _repository.AddBooking(booking);

@@ -12,5 +12,7 @@ namespace OnionDemo.Application.Query
     {
         BookingDto GetBooking(int id);
         IEnumerable<BookingDto> GetBookings();
+        // Get all bookings by accommodation id
+        IEnumerable<BookingDto> GetBookingsByAccommodation(int accommodationId);
     }
 }

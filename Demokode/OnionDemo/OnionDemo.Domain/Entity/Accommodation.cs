@@ -30,10 +30,11 @@ namespace OnionDemo.Domain.Entity
 
         }
 
-        public void Update(string name, string location)
+        public void Update(string name, string location, int hostId)
         {
             Name = name;
             Location = location;
+            HostId = hostId;
         }
     }
 }
