@@ -27,7 +27,6 @@ namespace OnionDemo.Domain.Entity
         public static Accommodation Create(string name, string location, int hostId)
         {
             return new Accommodation(name, location, hostId);
-
         }
 
         public void Update(string name, string location, int hostId)

@@ -16,6 +16,7 @@ public static class DependencyInjection
         services.AddScoped<IBookingQuery, BookingQuery>();
         services.AddScoped<IBookingDomainService, BookingDomainService>();
         services.AddScoped<IBookingRepository, BookingRepository>();
+        services.AddScoped<IAccommodationRepository, AccommodationRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork<BookMyHomeContext>>();
 
         // Database

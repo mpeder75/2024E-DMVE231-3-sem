@@ -27,9 +27,15 @@ namespace OnionDemo.Infrastructure
             return _db.Bookings.Single(a => a.Id == id);
         }
 
+        IEnumerable<Booking> IBookingRepository.GetBookingsByAccommodation(int accommodationId)
+        {
+            return _db.Bookings
+                .Where(b => b.AccommodationId == accommodationId)
+                .ToList();
+        }
+
         void IBookingRepository.UpdateBooking(Booking booking, byte[] rowversion)
         {
-
             _db.Entry(booking).Property(nameof(booking.RowVersion)).OriginalValue = rowversion;
             _db.SaveChanges();
         }

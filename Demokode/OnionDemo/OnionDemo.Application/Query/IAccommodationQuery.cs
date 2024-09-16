@@ -11,10 +11,8 @@ namespace OnionDemo.Application.Query
     {
         // Get accommodation by id
         AccommodationDto GetAccommodation(int id);
-
         // Get all accommodations
         IEnumerable<AccommodationDto> GetAccommodations();
-       
         // Get all accommodations by host
         IEnumerable<AccommodationDto> GetAccommodationsByHost(int hostId);
     }

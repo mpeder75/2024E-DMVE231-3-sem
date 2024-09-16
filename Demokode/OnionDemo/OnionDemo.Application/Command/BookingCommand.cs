@@ -25,11 +25,10 @@ public class BookingCommand : IBookingCommand
             _uow.BeginTransaction();
 
             // Do
-            var booking = Booking.Create(bookingDto.StartDate, bookingDto.EndDate, _domainSer);
-
+            var booking = Booking.Create(bookingDto.StartDate, bookingDto.EndDate, _domainService, bookingDto.AccommodationId);
             // Save
             _repository.AddBooking(booking);
-
+            // Commit
             _uow.Commit();
         }
         catch (Exception e)
@@ -42,7 +41,6 @@ public class BookingCommand : IBookingCommand
             {
                 throw new Exception($"Rollback failed: {ex.Message}", e);
             }
-
             throw;
         }
     }
@@ -54,12 +52,11 @@ public class BookingCommand : IBookingCommand
             _uow.BeginTransaction();
             // Load
             var booking = _repository.GetBooking(updateBookingDto.Id);
-
             // Do
             booking.Update(updateBookingDto.StartDate, updateBookingDto.EndDate, _domainService);
-
             // Save
             _repository.UpdateBooking(booking, updateBookingDto.RowVersion);
+            // Commit
             _uow.Commit();
         }
         catch (Exception e)

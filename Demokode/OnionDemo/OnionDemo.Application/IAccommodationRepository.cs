@@ -9,11 +9,11 @@ namespace OnionDemo.Application
 {
     public interface IAccommodationRepository
     {
-        // Command - kommer fra IAccommodationCommand
+        // Command - bruges af IAccommodationCommand
         void AddAccommodation(Accommodation accommodation);
         void UpdateAccommodation(Accommodation accommodation, byte[] rowVersion);
         void DeleteAccommodation(int id);
-        //Query - kommer fra IAccommodationQuery
+        //Query - bruges af IAccommodationQuery
         Accommodation GetAccommodation(int id);
         IEnumerable<Accommodation> GetAccommodations();
         IEnumerable<Accommodation> GetAccommodationsByHost(int hostId);

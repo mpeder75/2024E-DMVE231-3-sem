@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using OnionDemo.Domain.Entity;
 
 namespace OnionDemo.Infrastructure
@@ -14,8 +15,9 @@ namespace OnionDemo.Infrastructure
             : base(options)
         {
         }
-
+        
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Accommodation> Accommodations { get; set; }
 
     }
 }

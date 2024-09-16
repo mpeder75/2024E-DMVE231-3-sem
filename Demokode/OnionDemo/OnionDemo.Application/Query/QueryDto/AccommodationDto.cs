@@ -12,5 +12,7 @@ namespace OnionDemo.Application.Query.QueryDto
         public string Name { get; set; }
         public string Location { get; set; }
         public byte[] RowVersion { get; set; } = null!;
+        public int HostId { get; set; }
+        public List<BookingDto> Bookings { get; set; }
     }
 }

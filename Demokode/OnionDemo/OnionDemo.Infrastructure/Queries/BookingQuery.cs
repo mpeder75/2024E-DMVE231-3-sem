@@ -36,4 +36,16 @@ public class BookingQuery : IBookingQuery
         });
         return result;
     }
+
+    IEnumerable<BookingDto> IBookingQuery.GetBookingsByAccommodation(int accommodationId)
+    {
+        var result = _db.Bookings.AsNoTracking().Where(a => a.AccommodationId == accommodationId).Select(a => new BookingDto
+        {
+            Id = a.Id,
+            StartDate = a.StartDate,
+            EndDate = a.EndDate,
+            RowVersion = a.RowVersion
+        });
+        return result;
+    }
 }
