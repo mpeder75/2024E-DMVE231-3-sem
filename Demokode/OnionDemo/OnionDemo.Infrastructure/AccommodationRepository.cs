@@ -48,13 +48,11 @@ namespace OnionDemo.Infrastructure
         IEnumerable<Accommodation> IAccommodationRepository.GetAccommodations()
         {
             return _db.Accommodations.Include(a => a.Bookings).AsNoTracking().ToList();
-
         }
 
         IEnumerable<Accommodation> IAccommodationRepository.GetAccommodationsByHost(int hostId)
         {
             return _db.Accommodations.Include(a => a.Bookings).AsNoTracking().Where(x => x.HostId == hostId).ToList();
-
         }
 
         void IAccommodationRepository.UpdateAccommodation(Accommodation accommodation, byte[] rowVersion)

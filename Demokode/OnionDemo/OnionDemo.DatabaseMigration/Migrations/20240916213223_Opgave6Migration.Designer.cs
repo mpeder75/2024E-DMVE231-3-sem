@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnionDemo.Infrastructure;
 
@@ -11,9 +12,11 @@ using OnionDemo.Infrastructure;
 namespace OnionDemo.DatabaseMigration.Migrations
 {
     [DbContext(typeof(BookMyHomeContext))]
-    partial class BookMyHomeContextModelSnapshot : ModelSnapshot
+    [Migration("20240916213223_Opgave6Migration")]
+    partial class Opgave6Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,8 +52,6 @@ namespace OnionDemo.DatabaseMigration.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HostId");
-
                     b.ToTable("Accommodations");
                 });
 
@@ -84,42 +85,6 @@ namespace OnionDemo.DatabaseMigration.Migrations
                     b.ToTable("Bookings");
                 });
 
-            modelBuilder.Entity("OnionDemo.Domain.Entity.Host", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Hosts");
-                });
-
-            modelBuilder.Entity("OnionDemo.Domain.Entity.Accommodation", b =>
-                {
-                    b.HasOne("OnionDemo.Domain.Entity.Host", null)
-                        .WithMany("Accommodations")
-                        .HasForeignKey("HostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("OnionDemo.Domain.Entity.Booking", b =>
                 {
                     b.HasOne("OnionDemo.Domain.Entity.Accommodation", null)
@@ -132,11 +97,6 @@ namespace OnionDemo.DatabaseMigration.Migrations
             modelBuilder.Entity("OnionDemo.Domain.Entity.Accommodation", b =>
                 {
                     b.Navigation("Bookings");
-                });
-
-            modelBuilder.Entity("OnionDemo.Domain.Entity.Host", b =>
-                {
-                    b.Navigation("Accommodations");
                 });
 #pragma warning restore 612, 618
         }

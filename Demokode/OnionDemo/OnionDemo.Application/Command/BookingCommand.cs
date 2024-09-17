@@ -76,8 +76,23 @@ public class BookingCommand : IBookingCommand
 
     void IBookingCommand.DeleteBooking(DeleteBookingDto deleteBookingDto)
     {
-        // Load
-        // Do
-        // Save
+        try
+        {
+            _uow.BeginTransaction();
+            // Load
+            var booking = _repository.GetBooking(deleteBookingDto.Id);
+            if (booking == null)
+            {
+                throw new KeyNotFoundException($"Booking with id:{deleteBookingDto.Id} not found");
+            }
+            // Save
+            _repository.DeleteBooking(booking, deleteBookingDto.RowVersion);
+            _uow.Commit();
+        }
+        catch (Exception e)
+        {
+            _uow.Rollback();
+            throw;
+        }
     }
 }

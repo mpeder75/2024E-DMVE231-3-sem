@@ -10,12 +10,11 @@ namespace OnionDemo.Domain.Entity
     {
         public string Name { get; protected set; }
         public string Location { get; protected set; }
+        // Navigation properties
         public int HostId { get; protected set; }
         public List<Booking> Bookings { get; set; } = new List<Booking>();
 
-        protected Accommodation()
-        {
-        }
+        protected Accommodation() {}
 
         protected Accommodation(String name, string location, int hostId)
         {

@@ -22,9 +22,21 @@ namespace OnionDemo.Infrastructure
             _db.SaveChanges();
         }
 
+        void IBookingRepository.DeleteBooking(Booking booking, byte[] rowVersion)
+        {
+            _db.Entry(booking).Property(nameof(booking.RowVersion)).OriginalValue = rowVersion;
+            _db.Bookings.Remove(booking);
+            _db.SaveChanges();
+        }
+
         Booking IBookingRepository.GetBooking(int id)
         {
             return _db.Bookings.Single(a => a.Id == id);
+        }
+
+        IEnumerable<Booking> IBookingRepository.GetBookings()
+        {
+            return _db.Bookings.ToList();
         }
 
         IEnumerable<Booking> IBookingRepository.GetBookingsByAccommodation(int accommodationId)

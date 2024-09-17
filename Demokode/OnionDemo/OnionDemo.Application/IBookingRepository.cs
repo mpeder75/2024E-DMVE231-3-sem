@@ -12,7 +12,8 @@ namespace OnionDemo.Application
         Booking GetBooking(int id);
         void AddBooking(Booking booking);
         void UpdateBooking(Booking booking, byte[] rowversion);
-        // Get all bookings by accommodation id
+        void DeleteBooking(Booking booking, byte[] rowVersion);
+        IEnumerable<Booking> GetBookings();
         IEnumerable<Booking> GetBookingsByAccommodation(int accommodationId);
     }
 }
