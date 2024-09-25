@@ -6,6 +6,8 @@ public class Host : DomainEntity
 {
     private readonly List<Accommodation>? _accommodations;
 
-    public IReadOnlyCollection<Accommodation> Accommodations => _accommodations ?? [];
     public string Name { get; set; }
+
+    // read-only property for Accommodations - Navigation property
+    public IReadOnlyCollection<Accommodation> Accommodations => _accommodations ?? [];
 }

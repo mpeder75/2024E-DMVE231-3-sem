@@ -2,22 +2,25 @@
 
 public class Booking : DomainEntity
 {
+    public DateOnly StartDate { get; protected set; }
+    public DateOnly EndDate { get; protected set; }
+    // Navigation property - En Booking kan have EN Accommodation
+    public Accommodation Accommodation { get; set; }
+
     protected Booking()
     {
     }
 
-    private Booking(DateOnly startDate, DateOnly endDate, IEnumerable<Booking> exsistingBookings)
+    private Booking(DateOnly startDate, DateOnly endDate, IEnumerable<Booking> exsistingBookings, Accommodation accommodation)
     {
         StartDate = startDate;
         EndDate = endDate;
+        Accommodation = accommodation;
 
         AssureStartDateBeforeEndDate();
         AssureBookingSkalVæreIFremtiden(DateOnly.FromDateTime(DateTime.Now));
         AssureNoOverlapping(exsistingBookings);
     }
-
-    public DateOnly StartDate { get; protected set; }
-    public DateOnly EndDate { get; protected set; }
 
 
     protected void AssureStartDateBeforeEndDate()
@@ -35,7 +38,7 @@ public class Booking : DomainEntity
 
     protected void AssureNoOverlapping(IEnumerable<Booking> exsistingBookings)
     {
-        var otherBookings = exsistingBookings.Except(new []{this});
+        var otherBookings = exsistingBookings.Except(new[] { this });
         if (otherBookings.Any(other =>
                 (EndDate <= other.EndDate && EndDate >= other.StartDate) ||
                 (StartDate >= other.StartDate && StartDate <= other.EndDate) ||

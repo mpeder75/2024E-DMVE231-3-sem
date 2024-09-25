@@ -29,6 +29,16 @@ public class AccommodationRepository : IAccommodationRepository
         return _db.Accommodations.Include(a => a.Bookings).Single(a => a.Id == id);
     }
 
+    Booking IAccommodationRepository.GetBooking(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    Guest IAccommodationRepository.GetGuest(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     void IAccommodationRepository.UpdateBooking(Booking booking, byte[] rowversion)
     {
         _db.Entry(booking).Property(nameof(booking.RowVersion)).OriginalValue = rowversion;
