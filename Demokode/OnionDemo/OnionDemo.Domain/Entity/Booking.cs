@@ -6,16 +6,18 @@ public class Booking : DomainEntity
     public DateOnly EndDate { get; protected set; }
     // Navigation property - En Booking kan have EN Accommodation
     public Accommodation Accommodation { get; set; }
+    public Guest Guest { get; set; }
 
     protected Booking()
     {
     }
 
-    private Booking(DateOnly startDate, DateOnly endDate, IEnumerable<Booking> exsistingBookings, Accommodation accommodation)
+    private Booking(DateOnly startDate, DateOnly endDate, IEnumerable<Booking> exsistingBookings, Accommodation accommodation, Guest guest)
     {
         StartDate = startDate;
         EndDate = endDate;
         Accommodation = accommodation;
+        Guest = guest;
 
         AssureStartDateBeforeEndDate();
         AssureBookingSkalVæreIFremtiden(DateOnly.FromDateTime(DateTime.Now));
@@ -27,7 +29,6 @@ public class Booking : DomainEntity
     {
         if (!(StartDate < EndDate)) throw new ArgumentException("StartDato skal være før EndDato");
     }
-
 
     protected void AssureBookingSkalVæreIFremtiden(DateOnly now)
     {
@@ -53,9 +54,9 @@ public class Booking : DomainEntity
     /// <param name="endDate"></param>
     /// <param name="exsistingBookings"></param>
     /// <returns></returns>
-    public static Booking Create(DateOnly startDate, DateOnly endDate, IEnumerable<Booking> exsistingBookings)
+    public static Booking Create(DateOnly startDate, DateOnly endDate, IEnumerable<Booking> exsistingBookings, Accommodation accommodation, Guest guest)
     {
-        return new Booking(startDate, endDate, exsistingBookings);
+        return new Booking(startDate, endDate, exsistingBookings, accommodation, guest);
     }
 
     public void Update(DateOnly startDate, DateOnly endDate, IEnumerable<Booking> exsistingBookings)

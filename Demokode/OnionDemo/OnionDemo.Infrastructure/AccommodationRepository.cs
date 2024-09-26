@@ -21,22 +21,40 @@ public class AccommodationRepository : IAccommodationRepository
 
     void IAccommodationRepository.AddBooking(Accommodation accommodation)
     {
+        _db.Bookings.Add(accommodation.Bookings.Last());
         _db.SaveChanges();
+    }
+
+    void IAccommodationRepository.AddReview(Review review)
+    {
+       _db.Reviews.Add(review);
+       _db.SaveChanges();
     }
 
     Accommodation IAccommodationRepository.GetAccommodation(int id)
     {
-        return _db.Accommodations.Include(a => a.Bookings).Single(a => a.Id == id);
+        return _db.Accommodations
+            .Include(a => a.Bookings)
+            .Single(a => a.Id == id);
     }
 
     Booking IAccommodationRepository.GetBooking(int id)
     {
-        throw new NotImplementedException();
+        return _db.Bookings.Find(id);
     }
 
     Guest IAccommodationRepository.GetGuest(int id)
     {
-        throw new NotImplementedException();
+        return _db.Guests.Find(id);
+    }
+
+    IEnumerable<Review> IAccommodationRepository.GetReviewsForAccommodation(int accommodationId)
+    {
+        return _db.Reviews
+            .Include(r => r.Guest)
+            .Include(r => r.Booking)
+            .Where(r => r.Accommodation.Id == accommodationId)
+            .ToList();
     }
 
     void IAccommodationRepository.UpdateBooking(Booking booking, byte[] rowversion)

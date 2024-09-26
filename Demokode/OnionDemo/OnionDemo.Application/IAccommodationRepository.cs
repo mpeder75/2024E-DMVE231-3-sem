@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,7 @@ namespace OnionDemo.Application
 
         Guest GetGuest(int id);
         Booking GetBooking(int id);
+        IEnumerable<Review> GetReviewsForAccommodation(int accommodationId);
+        void AddReview(Review review);
     }
 }

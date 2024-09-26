@@ -41,8 +41,9 @@ public class AccommodationCommand : IAccommodationCommand
             _uow.BeginTransaction();
             // Load
             var accommodation = _repository.GetAccommodation(bookingDto.AccommodationId);
+            var guest = _repository.GetGuest(bookingDto.GuestId);
             // Do
-            accommodation.CreateBooking(bookingDto.StartDate, bookingDto.EndDate);
+            accommodation.CreateBooking(bookingDto.StartDate, bookingDto.EndDate, guest);
             // Save
             _repository.AddBooking(accommodation);
             _uow.Commit();
@@ -57,7 +58,6 @@ public class AccommodationCommand : IAccommodationCommand
             {
                 throw new Exception($"Rollback failed: {ex.Message}", e);
             }
-
             throw;
         }
     }
@@ -86,7 +86,6 @@ public class AccommodationCommand : IAccommodationCommand
             {
                 throw new Exception($"Rollback failed: {ex.Message}", e);
             }
-
             throw;
         }
     }

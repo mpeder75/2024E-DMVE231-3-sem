@@ -38,15 +38,20 @@ public class Accommodation : DomainEntity
     }
 
     // CreateBooking
-    public void CreateBooking(DateOnly startDate, DateOnly endDate)
+    public void CreateBooking(DateOnly startDate, DateOnly endDate, Guest guest)
     {
-        var booking = Booking.Create(startDate, endDate, Bookings);
+        var booking = Booking.Create(startDate, endDate, Bookings, this, guest);
         _bookings.Add(booking);
     }
 
     // CreateReview
     public void CreateReview(string content, int rating, Guest guest, Booking booking)
     {
+        if (booking.StartDate >= DateOnly.FromDateTime(DateTime.Now))
+        {
+            throw new ArgumentException("Review kan kun oprettes efter en booking er påbegyndt");
+        }
+
         // Review oprettes
         var review = Review.Create(content, rating, this, guest, booking);
         // Review tilføjes til reviews collection

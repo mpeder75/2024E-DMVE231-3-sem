@@ -2,9 +2,8 @@
 
 public class Guest : DomainEntity
 {
-    public string Name { get; private set; }
-    // Navigation property - En Guest kan have en til mange Reviews
-    public ICollection<Review> Reviews { get; private set; } = new List<Review>();
+    public string Name { get; set; }
+    public ICollection<Review> Reviews { get; set; } = new List<Review>();
 
     private Guest(string name)
     {
