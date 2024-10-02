@@ -15,5 +15,6 @@ namespace OnionDemo.Application
         void DeleteBooking(Booking booking, byte[] rowVersion);
         IEnumerable<Booking> GetBookings();
         IEnumerable<Booking> GetBookingsByAccommodation(int accommodationId);
+        Accommodation GetAccommodation(int accommodationId); 
     }
 }

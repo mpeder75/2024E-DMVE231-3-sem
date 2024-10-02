@@ -16,7 +16,7 @@ namespace OnionDemo.Domain.Entity
 
         protected Accommodation() {}
 
-        protected Accommodation(String name, string location, int hostId)
+        protected Accommodation(string name, string location, int hostId)
         {
             Name = name;
             Location = location;

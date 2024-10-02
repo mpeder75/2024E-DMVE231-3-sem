@@ -12,8 +12,8 @@ using OnionDemo.Infrastructure;
 namespace OnionDemo.DatabaseMigration.Migrations
 {
     [DbContext(typeof(BookMyHomeContext))]
-    [Migration("20240916214328_Opgave6MedHost")]
-    partial class Opgave6MedHost
+    [Migration("20240918070641_HostUpdate")]
+    partial class HostUpdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

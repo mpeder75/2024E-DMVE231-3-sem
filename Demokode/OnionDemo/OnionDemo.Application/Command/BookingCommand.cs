@@ -22,6 +22,8 @@ public class BookingCommand : IBookingCommand
     {
         try
         {
+            var accommodation = _repository.GetAccommodation(bookingDto.AccommodationId);
+
             _uow.BeginTransaction();
 
             // Do
@@ -69,7 +71,6 @@ public class BookingCommand : IBookingCommand
             {
                 throw new Exception($"Rollback failed: {ex.Message}", e);
             }
-
             throw;
         }
     }
